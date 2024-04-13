@@ -20,6 +20,14 @@ export class CentroCustoService {
     if (await this.valid(entity)) await this.centroCustoRepository.save(entity);
   }
 
+  async delete(id: string) {
+    const centroCusto = await this.centroCustoRepository.findOneByOrFail({
+      id: id,
+    });
+    await this.centroCustoRepository.remove(centroCusto);
+    return centroCusto;
+  }
+
   private async valid(entity: CentroCusto): Promise<boolean> {
     const validate = CentroCustoValidator.validate(entity);
     if (validate.error != null) {

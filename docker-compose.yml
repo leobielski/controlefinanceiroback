@@ -2,15 +2,16 @@ version: '3.5'
 
 services:
   db:
-    image: postgres
+    image: postgres:latest
     restart: always
     environment:
       POSTGRES_DB: controlefinanceiro
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      PGDATA: /pgdata
     container_name: postgres
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
 

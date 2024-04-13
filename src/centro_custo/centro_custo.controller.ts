@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
 import { CentroCusto } from './centro_custo.entity';
 import { CentroCustoService } from './centro_custo.service';
 import { CentroCustoDtoValidator } from './validator/centro-custo-dto.validator';
@@ -20,5 +20,10 @@ export class CentroCustoController {
     dto: CentroCustoDto,
   ) {
     return await this.centroCustoService.attach(CentroCustoDto.toDomain(dto));
+  }
+
+  @Delete(':id')
+  public async deleteCentroCusto(@Param('id') id: string) {
+    return await this.centroCustoService.delete(id);
   }
 }
